@@ -1,5 +1,4 @@
 .section_notes {
-    border: 1px solid #000;
     width: 100%;
     min-height: calc(100vh - 10rem);
 
@@ -12,18 +11,37 @@
 
 
     .notes_card {
+        position: relative;
         font-family: var(--font-two);
         width: 35rem;
         height: 20rem;
         overflow-y: hidden;
-        border-radius: 1rem;
-        box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1);
-        background-color: var(--color-five);
+        /* border-radius: 1rem; */
+        border:.2rem solid #fff;
+        border-image: linear-gradient(45deg, #C6C6C6, #9B9E9F) 1;
+        /* box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1); */
+        background-color:#ef6565;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
-        padding: 1rem;
-    }
+        padding: 1rem 2rem;
+        color: #f1f1f1;
 
+        .icon_edit  {
+            position: absolute;
+            cursor: pointer;
+            top: 1rem;
+            right: 1rem;
+            &&:hover {
+                transform: scale(1.1);
+                transition: all ease-in 0.3s;
+            }
+
+            img {
+                width: 2rem;
+            }
+        }
+    }
+ 
 }

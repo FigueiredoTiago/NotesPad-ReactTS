@@ -1,0 +1,28 @@
+header {  
+    width: 100vw;
+    position: relative;
+    height: 10rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+  width: 30rem;
+  position: relative;
+  font-family: var(--font-three);
+  font-size: 6rem;
+  font-weight: normal;
+  text-decoration: underline;
+  span {
+    color: #ef6565;
+  }
+
+}
+
+.title img {
+  position: absolute;
+  max-width: 8rem;
+  right: -3rem;
+}

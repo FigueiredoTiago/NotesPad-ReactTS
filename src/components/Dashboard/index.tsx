@@ -6,8 +6,6 @@ const index = () => {
     <>
     <main className={styles.container}>
 
-      <h1 className={styles.title}>Notes<span>Pad</span></h1>
-
       <Notes />
       
     </main>
@@ -15,4 +13,4 @@ const index = () => {
   )
 }
 
-export default index
+export default index 
