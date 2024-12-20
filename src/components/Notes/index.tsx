@@ -11,7 +11,12 @@ const index = () => {
 
        {data && data.map((note) => ( 
         <div key={note.id} className={styles.notes_card}>
-            <h1>{note.text}</h1>
+
+            <h1>{note.title}</h1>
+            
+            <p>{note.text}</p>
+
+
         </div>
         ))}
 

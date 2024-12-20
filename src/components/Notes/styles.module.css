@@ -15,6 +15,7 @@
         font-family: var(--font-two);
         width: 35rem;
         height: 20rem;
+        overflow-y: hidden;
         border-radius: 1rem;
         box-shadow: 0 0 1rem 0.5rem rgba(0, 0, 0, 0.1);
         background-color: var(--color-five);
