@@ -42,6 +42,8 @@
     }
 
     .icon_delete {
+      background-color: transparent;
+      border: none;
       position: absolute;
       cursor: pointer;
       top: 1rem;

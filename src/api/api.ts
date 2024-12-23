@@ -19,11 +19,13 @@ export const getNotes = async (): Promise<Note[]> => {
   return response.data.data;
 };
 
-
-
 //funcao para deletar uma nota da api o Id vem pelo Body da requisicao
 
 export const deleteNote = async (id: number): Promise<void> => {
-  await axios.delete(`http://localhost:3000/texts/delete/${id}`);
-};
+  confirm("Deseja realmente deletar essa nota?");
 
+  if (!confirm) {
+    return;
+  }
+  await axios.delete(`http://localhost:3000/texts/deletelist/${id}`);
+};

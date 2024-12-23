@@ -1,42 +1,54 @@
-import { useNotes } from "../../hooks/useNotes";
-import { useDeleteNotesMutation } from "../../hooks/useDeleteNotesMutation";
 import styles from "./styles.module.css";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { getNotes, deleteNote } from "../../api/api";
 
 const index = () => {
-  const { data } = useNotes();
-  const { mutate } = useDeleteNotesMutation();
+  const client = useQueryClient();
 
-  //funcao para deletar uma nota
-  const handleDelete = (id: number) => {
-    const isConfirmed = confirm("Deseja realmente deletar essa nota?");
+  //query para pegar todas as notas
+  const { data } = useQuery(["notes-lista"], getNotes, {
+    staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
+  });
 
-    if (isConfirmed) {
-      mutate(id);
-    }
-  };
+  //mutate para deletar uma nota por Id
+
+  const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
+    onSuccess: () => {
+      client.invalidateQueries(["notes-lista"]);
+    },
+  });
+
+  //console.log(notesData);
 
   return (
     <section className={styles.section_notes}>
-      {data &&
-        data.map((note) => (
-          <div key={note.id} className={styles.notes_card}>
-            <span
+      {data && data.length > 0 ? (
+        data.map((notesData) => (
+          <div key={notesData.id} className={styles.notes_card}>
+            <button
               className={styles.icon_delete}
-              onClick={() => handleDelete(note.id)}
+              onClick={() => mutate(notesData.id)}
+              disabled={isLoading}
             >
               <img src={deleteIcon} alt="" />
-            </span>
+            </button>
             <span className={styles.icon_edit}>
               <img src={editIcon} alt="" />
             </span>
 
-            <h1>-{note.title}-</h1>
+            <h1>-{notesData.title}-</h1>
 
-            <p>{note.text}</p>
+            <p>{notesData.text}</p>
           </div>
-        ))}
+        ))
+      ) : null}
+
+      {!data || data.length === 0 ? (
+        <h1 style={ { color:"red", textAlign: "center", position: "absolute" }  }>Nenhuma nota Criada ainda, Crie Uma Aqui!</h1>
+      ) : null}
+
     </section>
   );
 };
