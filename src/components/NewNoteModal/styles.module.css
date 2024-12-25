@@ -1,0 +1,115 @@
+.button_create_note {
+  background-color: #ef6565;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .close_modal_button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+    text-decoration: underline;
+    transition: all 0.3s;
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
+
+  .modalContent {
+    background-color: #ef6565;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 50%;
+    height: 50%;
+    box-shadow: -1px -1px 0px 10px var(--color-one);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 3rem;
+
+    .modal_title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-decoration: underline;
+      font-family: var(--font-three);
+      font-weight: lighter;
+      text-shadow: -0.1rem 0.1rem 0rem rgb(0, 0, 0);
+
+      span {
+        color: var(--color-five);
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-size: 1.5rem;
+      font-family: var(--font-one);
+      background-color: var(--color-one);
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-size: 1.5rem;
+      resize: none;
+      font-family: var(--font-one);
+      background-color: var(--color-one);
+    }
+
+    .send_form_button {
+      background-color: var(--color-five);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+
+    .error_message {
+      color: var(--color-one);
+      font-size: 1.5rem;
+      font-family: var(--font-one);
+      text-shadow: -0.1rem 0.1rem 0rem rgb(0, 0, 0);
+    }
+  }
+}
