@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.css";
+import { useEffect } from "react";
 
 interface NewNoteModalProps {
   isOpen: boolean;
@@ -12,11 +13,17 @@ interface FormData {
 }
 
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
-  if (isOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+  
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } 
+    // Limpa o estilo quando o componente é desmontado
+    return () => {
+      document.body.style.overflow = "";
+    };
+    
+  }, [isOpen]);
 
   const {
     register,
