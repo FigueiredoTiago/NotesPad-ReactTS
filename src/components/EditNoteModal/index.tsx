@@ -11,7 +11,7 @@ interface EditNoteModalProps {
 }
 
 const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
-  
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -31,6 +31,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
     register,
     handleSubmit,
     formState: { errors },
+
   } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => {
@@ -54,7 +55,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
               required: "Campo de título Obrigatório!",
             })}
             type="text"
-            placeholder="Titulo da sua Nota..."
+            placeholder="Titulo da sua Nota..." defaultValue={title}
           />
 
           {errors.title && (
@@ -63,7 +64,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
 
           <textarea
             {...register("text", { required: "Campo de nota Obrigatório!" })}
-            placeholder="Escreva Sua Nota..."
+            placeholder="Escreva Sua Nota..."  defaultValue={text}
           ></textarea>
 
           {errors.text && (
