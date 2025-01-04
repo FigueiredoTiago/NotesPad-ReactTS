@@ -40,3 +40,11 @@ export const deleteNote = async (id: number): Promise<void> => {
 export const createNote = async (note: NoteCreate): Promise<void> => {
   await axios.post("http://localhost:3000/texts/create", note);
 };
+
+
+
+//funcao para editar uma nota na api 
+
+export const editNote = async (id: number, note: NoteCreate): Promise<void> => {
+  await axios.patch(`http://localhost:3000/texts/edittext/${id}`, note);
+}

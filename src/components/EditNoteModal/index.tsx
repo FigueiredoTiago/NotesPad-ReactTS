@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.css";
 import { useEffect } from "react";
+import { editNote } from "../../api/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface EditNoteModalProps {
   isOpen: boolean;
@@ -11,7 +13,6 @@ interface EditNoteModalProps {
 }
 
 const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -31,11 +32,24 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
     register,
     handleSubmit,
     formState: { errors },
-
   } = useForm<FormData>();
 
+  const client = useQueryClient();
+
+  const { mutate } = useMutation((note: FormData) => editNote(id, note), {
+    onSuccess: () => {
+      client.invalidateQueries(["notes-lista"]);
+      setOpen();
+    },
+  });
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    if (data.title === title && data.text === text) {
+      alert("Nenhuma alteração foi feita!");
+      setOpen(); // Fecha o modal, pois não houve alterações
+      return;
+    }
+    mutate(data);
   });
 
   if (isOpen) {
@@ -55,7 +69,8 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
               required: "Campo de título Obrigatório!",
             })}
             type="text"
-            placeholder="Titulo da sua Nota..." defaultValue={title}
+            placeholder="Titulo da sua Nota..."
+            defaultValue={title}
           />
 
           {errors.title && (
@@ -64,7 +79,8 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
 
           <textarea
             {...register("text", { required: "Campo de nota Obrigatório!" })}
-            placeholder="Escreva Sua Nota..."  defaultValue={text}
+            placeholder="Escreva Sua Nota..."
+            defaultValue={text}
           ></textarea>
 
           {errors.text && (
