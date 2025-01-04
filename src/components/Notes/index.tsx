@@ -20,7 +20,6 @@ const index = () => {
     },
   });
 
-  //console.log(notesData);
 
   return (
     <section className={styles.section_notes}>

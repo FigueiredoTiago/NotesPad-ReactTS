@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.css";
 import { useEffect } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createNote } from "../../api/api";
 
 interface NewNoteModalProps {
   isOpen: boolean;
@@ -9,20 +11,28 @@ interface NewNoteModalProps {
 
 interface FormData {
   title: string;
-  note: string;
+  text: string;
 }
 
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
-  
+  const Client = useQueryClient();
+
+  const { mutate } = useMutation((note: FormData) => createNote(note), {
+    onSuccess: () => {
+      Client.invalidateQueries(["notes-lista"]);
+      alert("Nota Criada com Sucesso!");
+      setOpen();
+    },
+  });
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-    } 
+    }
     // Limpa o estilo quando o componente é desmontado
     return () => {
       document.body.style.overflow = "";
     };
-    
   }, [isOpen]);
 
   const {
@@ -32,7 +42,7 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutate(data);
   });
 
   if (isOpen) {
@@ -60,12 +70,12 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
           )}
 
           <textarea
-            {...register("note", { required: "Campo de nota Obrigatório!" })}
+            {...register("text", { required: "Campo de nota Obrigatório!" })}
             placeholder="Escreva Sua Nota..."
           ></textarea>
 
-          {errors.note && (
-            <p className={styles.error_message}>{errors.note.message}</p>
+          {errors.text && (
+            <p className={styles.error_message}>{errors.text.message}</p>
           )}
 
           <button className={styles.send_form_button}>Create</button>
