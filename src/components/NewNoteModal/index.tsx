@@ -20,7 +20,6 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   const { mutate } = useMutation((note: FormData) => createNote(note), {
     onSuccess: () => {
       Client.invalidateQueries(["notes-lista"]);
-      alert("Nota Criada com Sucesso!");
       setOpen();
     },
   });

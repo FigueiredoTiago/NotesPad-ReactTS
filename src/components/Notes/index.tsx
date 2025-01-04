@@ -13,7 +13,6 @@ const index = () => {
   });
 
   //mutate para deletar uma nota por Id
-
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
     onSuccess: () => {
       client.invalidateQueries(["notes-lista"]);

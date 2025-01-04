@@ -11,6 +11,7 @@
   .notes_card {
     position: relative;
     font-family: var(--font-two);
+    min-width: 35rem;
     max-width: 35rem;
     height: 20rem;
     overflow-y: hidden;
