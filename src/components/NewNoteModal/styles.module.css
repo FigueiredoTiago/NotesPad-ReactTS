@@ -19,7 +19,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.61);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
     background-color: #ef6565;
     padding: 2rem;
     border-radius: 1rem;
-    width: 50%;
+    width: 50rem;
     height: 50%;
     box-shadow: -1px -1px 0px 10px var(--color-one);
     display: flex;
