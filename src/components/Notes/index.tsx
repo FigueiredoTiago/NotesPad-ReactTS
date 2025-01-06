@@ -22,7 +22,6 @@ const NotesList = () => {
   });
 
   const [editNoteId, setEditNoteId] = useState<number | null>(null); // ID da nota sendo editada
-
   const openModal = (id: number) => setEditNoteId(id);
   const closeModal = () => setEditNoteId(null);
 

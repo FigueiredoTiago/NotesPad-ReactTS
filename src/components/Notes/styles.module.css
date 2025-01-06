@@ -26,6 +26,13 @@
     padding: 1rem 2rem;
     color: #000000;
 
+    transition: all ease-in 0.3s;
+
+    &&:hover {
+      height: 30rem;
+      overflow-y: scroll;
+    }
+
     .icon_edit {
       position: absolute;
       cursor: pointer;

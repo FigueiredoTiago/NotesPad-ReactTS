@@ -25,3 +25,15 @@ body {
   background-color: var(--color-one);
   font-family: var(--font-one);
 }
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
