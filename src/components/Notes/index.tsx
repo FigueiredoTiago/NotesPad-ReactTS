@@ -1,28 +1,30 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
-import { useState } from "react";
 import EditNoteModal from "../EditNoteModal";
 
-const index = () => {
+const NotesList = () => {
   const client = useQueryClient();
-  //query para pegar todas as notas
+
+  // Query para pegar todas as notas
   const { data } = useQuery(["notes-lista"], getNotes, {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
   });
 
-  //mutate para deletar uma nota por Id
+  // Mutate para deletar uma nota por Id
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
     onSuccess: () => {
       client.invalidateQueries(["notes-lista"]);
     },
   });
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [editNoteId, setEditNoteId] = useState<number | null>(null); // ID da nota sendo editada
 
-  const toggleModal = () => setIsOpen(!isOpen);
+  const openModal = (id: number) => setEditNoteId(id);
+  const closeModal = () => setEditNoteId(null);
 
   return (
     <section className={styles.section_notes}>
@@ -34,17 +36,27 @@ const index = () => {
                 onClick={() => mutate(notesData.id)}
                 disabled={isLoading}
               >
-                <img src={deleteIcon} alt="" />
+                <img src={deleteIcon} alt="Delete Note" />
               </button>
 
-              <span className={styles.icon_edit} onClick={toggleModal}>
-                <img src={editIcon} />
+              <span
+                className={styles.icon_edit}
+                onClick={() => openModal(notesData.id)}
+              >
+                <img src={editIcon} alt="Edit Note" />
               </span>
 
-              {isOpen && <EditNoteModal id={notesData.id} title={notesData.title} text={notesData.text} isOpen={isOpen} setOpen={toggleModal} />  }
+              {editNoteId === notesData.id && (
+                <EditNoteModal
+                  id={notesData.id}
+                  title={notesData.title}
+                  text={notesData.text}
+                  isOpen={true}
+                  setOpen={closeModal}
+                />
+              )}
 
               <h1>-{notesData.title}-</h1>
-
               <p>{notesData.text}</p>
             </div>
           ))
@@ -52,11 +64,11 @@ const index = () => {
 
       {!data || data.length === 0 ? (
         <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
-          Nenhuma nota Criada ainda, Crie Uma Aqui!
+          Nenhuma nota criada ainda, Crie uma aqui!
         </h1>
       ) : null}
     </section>
   );
 };
 
-export default index;
+export default NotesList;
