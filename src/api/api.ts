@@ -5,6 +5,7 @@ interface NotesResponse {
 }
 
 interface Note {
+  createdAt: string;
   id: number;
   title: string;
   text: string;

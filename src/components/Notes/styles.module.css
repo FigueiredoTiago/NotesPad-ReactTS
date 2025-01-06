@@ -33,6 +33,12 @@
       overflow-y: scroll;
     }
 
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      padding-top: 1rem;
+    }
     .icon_edit {
       position: absolute;
       cursor: pointer;
@@ -63,6 +69,13 @@
       img {
         width: 2rem;
       }
+    }
+
+    sup.updateTime {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.8rem;
     }
   }
 }

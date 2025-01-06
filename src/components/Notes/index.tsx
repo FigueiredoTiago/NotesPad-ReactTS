@@ -25,6 +25,20 @@ const NotesList = () => {
   const openModal = (id: number) => setEditNoteId(id);
   const closeModal = () => setEditNoteId(null);
 
+  // Exemplo de função para formatar a data
+  function formatDate(isoString: string): string {
+    const date = new Date(isoString);
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Mês começa de 0
+    const year = date.getFullYear();
+
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+
   return (
     <section className={styles.section_notes}>
       {data && data.length > 0
@@ -55,8 +69,12 @@ const NotesList = () => {
                 />
               )}
 
-              <h1>-{notesData.title}-</h1>
-              <p>{notesData.text}</p>
+              <h1 className={styles.title}>
+                -{notesData.title}-{" "}
+                <sup className={styles.updateTime}>{formatDate(notesData.createdAt)}</sup>
+              </h1>
+
+              <p className={styles.text}>{notesData.text}</p>
             </div>
           ))
         : null}
