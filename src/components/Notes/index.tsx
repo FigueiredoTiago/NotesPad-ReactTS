@@ -14,6 +14,8 @@ const NotesList = () => {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
   });
 
+  console.log(data);
+
   // Mutate para deletar uma nota por Id
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
     onSuccess: () => {
@@ -25,7 +27,7 @@ const NotesList = () => {
   const openModal = (id: number) => setEditNoteId(id);
   const closeModal = () => setEditNoteId(null);
 
-  // Exemplo de função para formatar a data
+  //função para formatar a data
   function formatDate(isoString: string): string {
     const date = new Date(isoString);
 

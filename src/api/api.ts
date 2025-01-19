@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const apiUrl =  import.meta.env.VITE_API_URL;
+
 interface NotesResponse {
   data: Note[];
 }
@@ -20,7 +22,7 @@ interface NoteCreate {
 
 export const getNotes = async (): Promise<Note[]> => {
   const response = await axios.get<NotesResponse>(
-    "http://localhost:3000/texts/list"
+    `${apiUrl}/note/list`
   );
   return response.data.data;
 };
@@ -33,13 +35,13 @@ export const deleteNote = async (id: number): Promise<void> => {
   if (!confirm) {
     return;
   }
-  await axios.delete(`http://localhost:3000/texts/deletelist/${id}`);
+  await axios.delete(`${apiUrl}/note/deletenote/${id}`);
 };
 
 //funcao para criar uma nova nota na api
 
 export const createNote = async (note: NoteCreate): Promise<void> => {
-  await axios.post("http://localhost:3000/texts/create", note);
+  await axios.post(`${apiUrl}/note/create`, note);
 };
 
 
@@ -47,5 +49,5 @@ export const createNote = async (note: NoteCreate): Promise<void> => {
 //funcao para editar uma nota na api 
 
 export const editNote = async (id: number, note: NoteCreate): Promise<void> => {
-  await axios.patch(`http://localhost:3000/texts/edittext/${id}`, note);
+  await axios.patch(`${apiUrl}/note/updatenote/${id}`, note);
 }
