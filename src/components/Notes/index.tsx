@@ -10,9 +10,13 @@ const NotesList = () => {
   const client = useQueryClient();
 
   // Query para pegar todas as notas
-  const { data } = useQuery(["notes-lista"], getNotes, {
-    staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
-  });
+  const { data, isLoading: loadingNotes } = useQuery(
+    ["notes-lista"],
+    getNotes,
+    {
+      staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
+    }
+  );
 
   // Mutate para deletar uma nota por Id
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
@@ -42,6 +46,7 @@ const NotesList = () => {
   return (
     <section className={styles.section_notes}>
       {isLoading ? <span className={styles.loader}></span> : null}
+      {loadingNotes ? <span className={styles.loader}></span> : null}
 
       {data && data.length > 0
         ? data.map((notesData) => (
@@ -83,7 +88,7 @@ const NotesList = () => {
           ))
         : null}
 
-      {!data || data.length === 0 ? (
+      {!isLoading && !loadingNotes && (!data || data.length === 0) ? (
         <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
           Nenhuma nota criada ainda, Crie uma aqui!
         </h1>
