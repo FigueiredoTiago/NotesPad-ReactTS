@@ -17,7 +17,7 @@ interface FormData {
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   const Client = useQueryClient();
 
-  const { mutate } = useMutation((note: FormData) => createNote(note), {
+  const { mutate, isLoading } = useMutation((note: FormData) => createNote(note), {
     onSuccess: () => {
       Client.invalidateQueries(["notes-lista"]);
       setOpen();
@@ -77,7 +77,9 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
             <p className={styles.error_message}>{errors.text.message}</p>
           )}
 
-          <button className={styles.send_form_button}>Create</button>
+          {isLoading ? <span className={styles.loader}></span> : <button className={styles.send_form_button}>Create</button>}
+          
+
         </form>
       </div>
     );

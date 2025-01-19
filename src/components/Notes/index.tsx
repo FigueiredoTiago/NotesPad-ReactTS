@@ -14,8 +14,6 @@ const NotesList = () => {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
   });
 
-  console.log(data);
-
   // Mutate para deletar uma nota por Id
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
     onSuccess: () => {

@@ -21,7 +21,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen]); 
 
   interface FormData {
     title: string;
@@ -36,7 +36,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
 
   const client = useQueryClient();
 
-  const { mutate } = useMutation((note: FormData) => editNote(id, note), {
+  const { mutate, isLoading } = useMutation((note: FormData) => editNote(id, note), {
     onSuccess: () => {
       client.invalidateQueries(["notes-lista"]);
       setOpen();
@@ -87,7 +87,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
             <p className={styles.error_message}>{errors.text.message}</p>
           )}
 
-          <button className={styles.send_form_button}>Edit</button>
+          {isLoading ? <span className={styles.loader}></span> : <button className={styles.send_form_button}>Edit</button>}
         </form>
       </div>
     );
