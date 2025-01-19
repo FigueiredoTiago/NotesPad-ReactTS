@@ -41,6 +41,8 @@ const NotesList = () => {
 
   return (
     <section className={styles.section_notes}>
+      {isLoading ? <span className={styles.loader}></span> : null}
+
       {data && data.length > 0
         ? data.map((notesData) => (
             <div key={notesData.id} className={styles.notes_card}>
@@ -71,7 +73,9 @@ const NotesList = () => {
 
               <h1 className={styles.title}>
                 -{notesData.title}-{" "}
-                <sup className={styles.updateTime}>{formatDate(notesData.createdAt)}</sup>
+                <sup className={styles.updateTime}>
+                  {formatDate(notesData.createdAt)}
+                </sup>
               </h1>
 
               <p className={styles.text}>{notesData.text}</p>
