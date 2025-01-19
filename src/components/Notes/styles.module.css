@@ -39,6 +39,12 @@
       text-align: center;
       padding-top: 1rem;
     }
+
+    .text {
+      white-space: pre-wrap; 
+      word-wrap: break-word;
+    }
+
     .icon_edit {
       position: absolute;
       cursor: pointer;
