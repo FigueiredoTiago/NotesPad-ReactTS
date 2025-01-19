@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
-import editIcon from "../../assets/icons/edit.svg";
+import editIcon from "../../assets/icons/Edit.svg";
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
