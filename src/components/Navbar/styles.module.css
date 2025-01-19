@@ -6,24 +6,35 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .title {
-  width: 30rem;
   position: relative;
   font-family: var(--font-three);
   font-size: 6rem;
   font-weight: normal;
   text-decoration: underline;
+  
   span {
     color: #ef6565;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 3rem;
+    
   }
 }
 
 .title img {
   position: absolute;
   max-width: 8rem;
-  right: -3rem;
+  right: -7rem;
+
+  @media screen and (max-width: 768px) {
+    max-width: 5rem;
+    right: -4.6rem;
+  }
 }
 
 .openModalButton {
@@ -38,5 +49,12 @@ header {
 
   &:hover {
     scale: 1.1;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem 1rem;
+    width: 100%;
+    max-width: 10rem;
+    
   }
 }
