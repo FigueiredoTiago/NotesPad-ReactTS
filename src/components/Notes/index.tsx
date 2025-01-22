@@ -5,18 +5,20 @@ import deleteIcon from "../../assets/icons/deleteIcon.svg";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
 import EditNoteModal from "../EditNoteModal";
+import { AxiosError } from "axios";
 
 const NotesList = () => {
   const client = useQueryClient();
 
   // Query para pegar todas as notas
-  const { data, isLoading: loadingNotes } = useQuery(
-    ["notes-lista"],
-    getNotes,
-    {
-      staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
-    }
-  );
+  const {
+    data,
+    isLoading: loadingNotes,
+    error,
+  } = useQuery(["notes-lista"], getNotes, {
+    staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
+    retry: false,
+  });
 
   // Mutate para deletar uma nota por Id
   const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
@@ -41,6 +43,19 @@ const NotesList = () => {
     const minutes = String(date.getMinutes()).padStart(2, "0");
 
     return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+
+  // Renderização do componente se tiver erro, exibir mensagem de erro
+
+  if (error) {
+    const axiosError = error as AxiosError;
+
+    return (
+      <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
+        Erro ao carregar as notas:{" "}
+        {String(axiosError.response?.data) || "Erro desconhecido"}
+      </h1>
+    );
   }
 
   return (
