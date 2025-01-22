@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl =  import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface NotesResponse {
   data: Note[];
@@ -20,10 +20,12 @@ interface NoteCreate {
 
 //funcao get com axios para pegar todas as notas da api
 
-export const getNotes = async (): Promise<Note[]> => {
-  const response = await axios.get<NotesResponse>(
-    `${apiUrl}/note/list`
-  );
+export const getNotes = async (token: string): Promise<Note[]> => {
+  const response = await axios.get<NotesResponse>(`${apiUrl}/note/list`, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho
+    },
+  });
   return response.data.data;
 };
 
@@ -44,10 +46,8 @@ export const createNote = async (note: NoteCreate): Promise<void> => {
   await axios.post(`${apiUrl}/note/create`, note);
 };
 
-
-
-//funcao para editar uma nota na api 
+//funcao para editar uma nota na api
 
 export const editNote = async (id: number, note: NoteCreate): Promise<void> => {
   await axios.patch(`${apiUrl}/note/updatenote/${id}`, note);
-}
+};

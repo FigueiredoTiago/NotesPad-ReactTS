@@ -10,12 +10,15 @@ import { AxiosError } from "axios";
 const NotesList = () => {
   const client = useQueryClient();
 
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oR";
+
   // Query para pegar todas as notas
   const {
     data,
     isLoading: loadingNotes,
     error,
-  } = useQuery(["notes-lista"], getNotes, {
+  } = useQuery(["notes-lista"], () => getNotes(token), {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
     retry: false,
   });
@@ -53,7 +56,11 @@ const NotesList = () => {
     return (
       <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
         Erro ao carregar as notas:{" "}
-        {String(axiosError.response?.data) || "Erro desconhecido"}
+        {typeof axiosError.response?.data === "object" &&
+        axiosError.response?.data !== null &&
+        "message" in axiosError.response.data
+          ? String((axiosError.response.data as { message: string }).message)
+          : "Erro desconhecido"}
       </h1>
     );
   }
