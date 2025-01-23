@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../../api/api";
+import { toast } from "react-toastify";
 
 interface NewNoteModalProps {
   isOpen: boolean;
@@ -14,15 +15,29 @@ interface FormData {
   text: string;
 }
 
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oE";
+
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   const Client = useQueryClient();
 
-  const { mutate, isLoading } = useMutation((note: FormData) => createNote(note), {
-    onSuccess: () => {
-      Client.invalidateQueries(["notes-lista"]);
-      setOpen();
-    },
-  });
+  const { mutate, isLoading } = useMutation(
+    (note: FormData) => createNote(note, token),
+    {
+      onSuccess: () => {
+        Client.invalidateQueries(["notes-lista"]);
+        toast.success("Nota criada com sucesso!");
+        setOpen();
+      },
+      onError: (error: any) => {
+        toast.error(
+          `Erro ao criar a nota: ${
+            error?.response.data.message || "Tente novamente mais tarde."
+          }`
+        );
+      },
+    }
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -77,9 +92,11 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
             <p className={styles.error_message}>{errors.text.message}</p>
           )}
 
-          {isLoading ? <span className={styles.loader}></span> : <button className={styles.send_form_button}>Create</button>}
-          
-
+          {isLoading ? (
+            <span className={styles.loader}></span>
+          ) : (
+            <button className={styles.send_form_button}>Create</button>
+          )}
         </form>
       </div>
     );
