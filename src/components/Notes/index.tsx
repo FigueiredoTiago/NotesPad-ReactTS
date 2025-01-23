@@ -5,13 +5,16 @@ import deleteIcon from "../../assets/icons/deleteIcon.svg";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
 import EditNoteModal from "../EditNoteModal";
-import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 const NotesList = () => {
   const client = useQueryClient();
 
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oE";
+
+  const token2 =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oa";
 
   // Query para pegar todas as notas
   const {
@@ -21,6 +24,14 @@ const NotesList = () => {
   } = useQuery(["notes-lista"], () => getNotes(token), {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
     retry: false,
+    onError: (error: any) => {
+      // Exibe uma mensagem de erro
+      toast.error(
+        `Erro ao Carregar as notas: ${
+          error?.response.data.message || "Tente novamente mais tarde."
+        }`
+      );
+    },
   });
 
   // Mutate para deletar uma nota por Id
@@ -29,6 +40,15 @@ const NotesList = () => {
     {
       onSuccess: () => {
         client.invalidateQueries(["notes-lista"]);
+        toast.success("Nota deletada com sucesso!"); // Mensagem de sucesso
+      },
+      onError: (error: any) => {
+        // Exibe uma mensagem de erro
+        toast.error(
+          `Erro ao deletar a nota: ${
+            error?.response.data.message || "Tente novamente mais tarde."
+          }`
+        );
       },
     }
   );
@@ -54,16 +74,9 @@ const NotesList = () => {
   // Renderização do componente se tiver erro, exibir mensagem de erro
 
   if (error) {
-    const axiosError = error as AxiosError;
-
     return (
       <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
-        Erro ao carregar as notas:{" "}
-        {typeof axiosError.response?.data === "object" &&
-        axiosError.response?.data !== null &&
-        "message" in axiosError.response.data
-          ? String((axiosError.response.data as { message: string }).message)
-          : "Erro desconhecido"}
+        Erro ao carregar as notas...{" "}
       </h1>
     );
   }
@@ -118,8 +131,6 @@ const NotesList = () => {
           Nenhuma nota criada ainda para ser exibida aqui...
         </h1>
       ) : null}
-
-
     </section>
   );
 };
