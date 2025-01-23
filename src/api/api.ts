@@ -46,7 +46,10 @@ export const deleteNote = async (id: number, token: string): Promise<void> => {
 
 //funcao para criar uma nova nota na api
 
-export const createNote = async (note: NoteCreate, token: string): Promise<void> => {
+export const createNote = async (
+  note: NoteCreate,
+  token: string
+): Promise<void> => {
   await axios.post(`${apiUrl}/note/create`, note, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -56,6 +59,14 @@ export const createNote = async (note: NoteCreate, token: string): Promise<void>
 
 //funcao para editar uma nota na api
 
-export const editNote = async (id: number, note: NoteCreate): Promise<void> => {
-  await axios.patch(`${apiUrl}/note/updatenote/${id}`, note);
+export const editNote = async (
+  id: number,
+  note: NoteCreate,
+  token: string
+): Promise<void> => {
+  await axios.patch(`${apiUrl}/note/updatenote/${id}`, note, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
