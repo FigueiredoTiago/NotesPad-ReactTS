@@ -24,11 +24,14 @@ const NotesList = () => {
   });
 
   // Mutate para deletar uma nota por Id
-  const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
-    onSuccess: () => {
-      client.invalidateQueries(["notes-lista"]);
-    },
-  });
+  const { mutate, isLoading } = useMutation(
+    (id: number) => deleteNote(id, token),
+    {
+      onSuccess: () => {
+        client.invalidateQueries(["notes-lista"]);
+      },
+    }
+  );
 
   const [editNoteId, setEditNoteId] = useState<number | null>(null); // ID da nota sendo editada
   const openModal = (id: number) => setEditNoteId(id);
@@ -112,9 +115,11 @@ const NotesList = () => {
 
       {!isLoading && !loadingNotes && (!data || data.length === 0) ? (
         <h1 style={{ color: "red", textAlign: "center", position: "absolute" }}>
-          Nenhuma nota criada ainda, Crie uma aqui!
+          Nenhuma nota criada ainda para ser exibida aqui...
         </h1>
       ) : null}
+
+
     </section>
   );
 };
