@@ -5,6 +5,7 @@ import { useForm, Resolver } from "react-hook-form";
 import { login } from "../../api/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
 
 type FormValues = {
   nick: string;
@@ -32,6 +33,8 @@ const resolver: Resolver<FormValues> = async (values) => {
 };
 
 export default function BasicModal() {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,6 +55,11 @@ export default function BasicModal() {
 
       Cookies.set("auth", token, { expires: 1 });
       Cookies.set("nick", nick, { expires: 1 });
+
+      toast.info("Logado com sucesso, Indo para a dashboard...");
+      //navegar para a dashboard
+
+      navigate("/dashboard");
     } catch (error: any) {
       toast.error(error.response?.data || "Erro ao fazer login");
     }
@@ -78,7 +86,7 @@ export default function BasicModal() {
             <p className={styles.error_message}>{errors.nick.message}</p>
           )}
 
-          <input {...register("password")} placeholder="Password..." />
+          <input {...register("password")} placeholder="Password..." type="password" />
           {errors?.password && (
             <p className={styles.error_message}>{errors.password.message}</p>
           )}
