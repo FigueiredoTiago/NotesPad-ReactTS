@@ -2,6 +2,8 @@ import * as React from "react";
 import styles from "./styles.module.css";
 import Modal from "@mui/material/Modal";
 import { useForm, Resolver } from "react-hook-form";
+import { login } from "../../api/api";
+import { toast } from "react-toastify";
 
 type FormValues = {
   nick: string;
@@ -38,11 +40,21 @@ export default function BasicModal() {
     formState: { errors },
   } = useForm<FormValues>({ resolver });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await login(data.nick, data.password);
+      toast.success("Logado com sucesso!");
+
+      console.log(response);
+      
+    } catch (error: any) {
+      toast.error(error.response?.data || "Erro ao fazer login");
+    }
+  });
 
   return (
     <div>
-      <button onClick={handleOpen} className={styles.button_modal} >
+      <button onClick={handleOpen} className={styles.button_modal}>
         Login
       </button>
 

@@ -1,6 +1,8 @@
 import styles from "./styles.module.css";
 import brainPad from "../../assets/img/brainpad.svg";
 import LoginModal from "../../components/LoginModal/index";
+import { ToastContainer } from "react-toastify";
+
 
 const Home = () => {
   return (
@@ -17,6 +19,9 @@ const Home = () => {
       </h1>
 
       <img src={brainPad} alt="" className={styles.homeImage} />
+
+      <ToastContainer />
+
     </section>
   );
 };

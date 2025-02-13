@@ -70,3 +70,16 @@ export const editNote = async (
     },
   });
 };
+
+//funcao para fazer login na api
+
+export const login = async (
+  nick: string,
+  password: string
+): Promise<string> => {
+  const response = await axios.post(`${apiUrl}/user/login`, {
+    nick,
+    password,
+  });
+  return response.data;
+};
