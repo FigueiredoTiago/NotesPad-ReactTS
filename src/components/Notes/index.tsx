@@ -6,15 +6,17 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
 import EditNoteModal from "../EditNoteModal";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 const NotesList = () => {
   const client = useQueryClient();
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM5NDQ3MTA0LCJleHAiOjE3Mzk1MzM1MDR9.H4Q-oZQIWatfxCdrx2U2XiwSo39_w2y3eQqWuL54IdY";
+  const token = Cookies.get("auth");
 
-  // const token2 =
-  ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oa");
+  if (!token) {
+    toast.error("Erro: Token de autenticação não encontrado.");
+    return null; // retorna para a pag de login/home
+  }
 
   // Query para pegar todas as notas
   const {

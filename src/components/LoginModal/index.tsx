@@ -4,10 +4,12 @@ import Modal from "@mui/material/Modal";
 import { useForm, Resolver } from "react-hook-form";
 import { login } from "../../api/api";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 type FormValues = {
   nick: string;
   password: string;
+  token?: string;
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
@@ -45,8 +47,11 @@ export default function BasicModal() {
       const response = await login(data.nick, data.password);
       toast.success("Logado com sucesso!");
 
-      console.log(response);
-      
+      const token = response.token;
+      const nick = response.nick;
+
+      Cookies.set("auth", token, { expires: 1 });
+      Cookies.set("nick", nick, { expires: 1 });
     } catch (error: any) {
       toast.error(error.response?.data || "Erro ao fazer login");
     }

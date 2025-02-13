@@ -76,10 +76,13 @@ export const editNote = async (
 export const login = async (
   nick: string,
   password: string
-): Promise<string> => {
+): Promise<{ token: string; nick: string }> => {
   const response = await axios.post(`${apiUrl}/user/login`, {
     nick,
     password,
   });
-  return response.data;
+  return {
+    token: response.data.token,
+    nick: response.data.nick,
+  };
 };
