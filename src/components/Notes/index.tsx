@@ -11,10 +11,10 @@ const NotesList = () => {
   const client = useQueryClient();
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oE";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM5NDQ3MTA0LCJleHAiOjE3Mzk1MzM1MDR9.H4Q-oZQIWatfxCdrx2U2XiwSo39_w2y3eQqWuL54IdY";
 
   // const token2 =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oa";
+  ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM3NTY3NDE3LCJleHAiOjE3Mzc2NTM4MTd9.o8cPtgf8DCbbW11vLfqSgQKcSjMQSFVAz-xh_utx0oa");
 
   // Query para pegar todas as notas
   const {

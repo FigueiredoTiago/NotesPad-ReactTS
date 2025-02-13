@@ -1,6 +1,7 @@
 import Notes from '../Notes'
 import styles from './styles.module.css'
 
+
 const index = () => {
   return (
     <>
