@@ -34,6 +34,7 @@ const resolver: Resolver<FormValues> = async (values) => {
 
 export default function BasicModal() {
   const navigate = useNavigate();
+  const [loading, setLoading] = React.useState(false);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -47,6 +48,7 @@ export default function BasicModal() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setLoading(true);
       const response = await login(data.nick, data.password);
       toast.success("Logado com sucesso!");
 
@@ -60,6 +62,8 @@ export default function BasicModal() {
       navigate("/dashboard");
     } catch (error: any) {
       toast.error(error.response?.data || "Erro ao fazer login");
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -84,12 +88,20 @@ export default function BasicModal() {
             <p className={styles.error_message}>{errors.nick.message}</p>
           )}
 
-          <input {...register("password")} placeholder="Password..." type="password" />
+          <input
+            {...register("password")}
+            placeholder="Password..."
+            type="password"
+          />
           {errors?.password && (
             <p className={styles.error_message}>{errors.password.message}</p>
           )}
 
-          <button className={styles.send_form_button}>Login</button>
+          {loading ? (
+            <span className={styles.loader}></span>
+          ) : (
+            <button className={styles.send_form_button}>Login</button>
+          )}
         </form>
       </Modal>
     </div>
