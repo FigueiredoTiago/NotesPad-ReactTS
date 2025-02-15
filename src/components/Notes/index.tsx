@@ -15,7 +15,7 @@ const NotesList = () => {
 
   if (!token) {
     toast.error("Erro: Token de autenticação não encontrado.");
-    return null; // retorna para a pag de login/home
+    return null;
   }
 
   // Query para pegar todas as notas

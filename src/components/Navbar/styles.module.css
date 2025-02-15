@@ -9,6 +9,18 @@ header {
   
 }
 
+.nick {
+  text-shadow: 0.1rem 0.1rem 0.1rem #000000;
+  color: var(--color-four);
+  font-family: var(--font-three);
+  font-size: 3rem;
+  font-weight: lighter;
+
+  span {
+    color: #ef6565;
+  }
+}
+
 .title {
   position: relative;
   font-family: var(--font-three);
@@ -37,8 +49,41 @@ header {
   }
 }
 
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
 .openModalButton {
   background-color: #ef6565;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem 1rem;
+    width: 100%;
+    max-width: 10rem;
+    
+  }
+}
+
+.exitButton {
+  background-color: var(--color-three);
   border: none;
   padding: 1rem 2rem;
   border-radius: 1rem;
