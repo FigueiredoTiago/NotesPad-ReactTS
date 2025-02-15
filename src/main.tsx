@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "./pages/home/index.tsx";
+import ProtectedRoute from "./components/ProtectedRoute/index.tsx";
 
 const client = new QueryClient();
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<App />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<App />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

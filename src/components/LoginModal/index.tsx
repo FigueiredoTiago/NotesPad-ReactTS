@@ -55,8 +55,6 @@ export default function BasicModal() {
 
       Cookies.set("auth", token, { expires: 1 });
       Cookies.set("nick", nick, { expires: 1 });
-
-      toast.info("Logado com sucesso, Indo para a dashboard...");
       //navegar para a dashboard
 
       navigate("/dashboard");
