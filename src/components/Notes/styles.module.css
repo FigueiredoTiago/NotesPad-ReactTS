@@ -10,7 +10,9 @@
 
   .notes_card {
     position: relative;
-    font-family: var(--font-two);
+    font-family: var(--font-four);
+    color: #000;
+    font-size: 2rem;
     min-width: 33rem;
     max-width: 33rem;
     height: 20rem;
@@ -21,10 +23,9 @@
     background-color: #ef6565;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     gap: 1rem;
     padding: 1rem 2rem;
-    color: #000000;
     transition: all ease-in 0.3s;
 
     &&:hover {
@@ -36,7 +37,7 @@
       font-size: 2rem;
       font-weight: 700;
       text-align: center;
-      padding-top: 1rem;
+      padding-top: 2rem;
     }
 
     .text {
@@ -80,7 +81,7 @@
       position: absolute;
       top: 1rem;
       left: 1rem;
-      font-size: 0.8rem;
+      font-size: 1.1rem;
     }
   }
 }
