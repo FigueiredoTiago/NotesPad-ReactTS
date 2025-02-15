@@ -6,6 +6,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
- 
+.nick {
+  padding-top: 3rem;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0.1rem #000000;
+  color: var(--color-four);
+  font-family: var(--font-three);
+  font-size: 3rem;
+  font-weight: lighter;
+
+  span {
+    text-transform: uppercase;
+    color: #ef6565;
+  }
+}

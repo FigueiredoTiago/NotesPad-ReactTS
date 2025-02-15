@@ -34,16 +34,12 @@ const index = () => {
         Notes<span>Pad</span>
       </h1>
 
-      <h2 className={styles.nick}>
-        Bem-Vindo(a): <span>{nick}</span>
-      </h2>
-
       <nav className={styles.nav}>
         <button
           onClick={() => setIsOpen(true)}
           className={styles.openModalButton}
         >
-          Nova Nota
+          +Nota
         </button>
         <button onClick={() => logout()} className={styles.exitButton}>
           Sair
