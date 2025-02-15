@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../../api/api";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 interface NewNoteModalProps {
   isOpen: boolean;
@@ -15,11 +16,15 @@ interface FormData {
   text: string;
 }
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM5NDQ3MTA0LCJleHAiOjE3Mzk1MzM1MDR9.H4Q-oZQIWatfxCdrx2U2XiwSo39_w2y3eQqWuL54IdY";
-
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   const Client = useQueryClient();
+
+  const token = Cookies.get("auth");
+
+  if (!token) {
+    toast.error("Erro: Token de autenticação não encontrado.");
+    return null;
+  }
 
   const { mutate, isLoading } = useMutation(
     (note: FormData) => createNote(note, token),
