@@ -55,8 +55,8 @@ export default function BasicModal() {
       const token = response.token;
       const nick = response.nick;
 
-      Cookies.set("auth", token, { expires: 1 });
-      Cookies.set("nick", nick, { expires: 1 });
+      Cookies.set("auth", token, { expires: 1 / 24 });
+      Cookies.set("nick", nick, { expires: 1 / 24 });
       //navegar para a dashboard
 
       navigate("/dashboard");
