@@ -24,12 +24,13 @@ const Home = () => {
         <RegisteModal />
       </nav>
 
-      <h1 className={styles.title}>
-        Salve suas <span>ideias</span> no{" "}
-        <span className={styles.spanPad}>NotesPad</span>
-      </h1>
-
-      <img src={brainPad} alt="" className={styles.homeImage} />
+      <div className={styles.home_content}>
+        <h1 className={styles.title}>
+          Salve suas <span>ideias</span> no{" "}
+          <span className={styles.spanPad}>NotesPad</span>
+        </h1>
+        <img src={brainPad} alt="" className={styles.homeImage} />
+      </div>
 
       <ToastContainer />
     </section>
