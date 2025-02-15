@@ -1,0 +1,113 @@
+.button_modal {
+  background-color: var(--color-five);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+
+  form {
+    background-color: #ef6565;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 50rem;
+    height: 50%;
+    max-height: 40rem;
+    box-shadow: -1px -1px 0px 10px var(--color-one);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    @media screen and (max-width: 768px) {
+      width: 90%;
+    }
+
+    .modal_title {
+      color: var(--color-five);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-decoration: underline;
+      font-family: var(--font-three);
+      font-weight: lighter;
+      text-shadow: 0.1rem 0.1rem 0.1rem #000000;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: none;
+      font-size: 1.5rem;
+      font-family: var(--font-one);
+      background-color: var(--color-one);
+    }
+
+    .error_message {
+      color: var(--color-one);
+      font-size: 1.5rem;
+      font-family: var(--font-one);
+      text-shadow: -0.1rem 0.1rem 0rem rgb(0, 0, 0);
+    }
+
+    .send_form_button {
+      background-color: var(--color-five);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
+}
+
+.loader {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  color: #fff;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite alternate;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
+  }
+  33% {
+    box-shadow: -38px 0px, -14px -12px, 14px 0, 38px 0;
+  }
+  66% {
+    box-shadow: -38px 0px, -14px 0, 14px -12px, 38px 0;
+  }
+  100% {
+    box-shadow: -38px 0, -14px 0, 14px 0, 38px -12px;
+  }
+}

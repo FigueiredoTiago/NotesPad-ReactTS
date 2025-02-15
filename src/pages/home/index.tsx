@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import brainPad from "../../assets/img/brainpad.svg";
 import LoginModal from "../../components/LoginModal/index";
+import RegisteModal from "../../components/RegisterModal/index";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import useAuth from "../../hooks/userAuth";
@@ -20,6 +21,7 @@ const Home = () => {
     <section className={styles.homeContainer}>
       <nav className={styles.home_nav}>
         <LoginModal />
+        <RegisteModal />
       </nav>
 
       <h1 className={styles.title}>

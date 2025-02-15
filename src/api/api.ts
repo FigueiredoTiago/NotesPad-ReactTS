@@ -86,3 +86,17 @@ export const login = async (
     nick: response.data.nick,
   };
 };
+
+//funcao para registrar um novo usuario na api
+
+export const registerUser = async (
+  nick: string,
+  password: string
+): Promise<void> => {
+  const response = await axios.post(`${apiUrl}/user/create`, {
+    nick,
+    password,
+  });
+
+  return response.data;
+};

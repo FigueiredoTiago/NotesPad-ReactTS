@@ -2,15 +2,12 @@ import * as React from "react";
 import styles from "./styles.module.css";
 import Modal from "@mui/material/Modal";
 import { useForm, Resolver } from "react-hook-form";
-import { login } from "../../api/api";
+import { registerUser } from "../../api/api";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router";
 
 type FormValues = {
   nick: string;
   password: string;
-  token?: string;
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
@@ -33,7 +30,6 @@ const resolver: Resolver<FormValues> = async (values) => {
 };
 
 export default function BasicModal() {
-  const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
 
   const [open, setOpen] = React.useState(false);
@@ -49,19 +45,14 @@ export default function BasicModal() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setLoading(true);
-      const response = await login(data.nick, data.password);
-      toast.success("Logado com sucesso!");
 
-      const token = response.token;
-      const nick = response.nick;
+      await registerUser(data.nick, data.password);
 
-      Cookies.set("auth", token, { expires: 1 });
-      Cookies.set("nick", nick, { expires: 1 });
-      //navegar para a dashboard
+      toast.success("Usuario criado com sucesso, faça login Para continuar!");
 
-      navigate("/dashboard");
+      handleClose();
     } catch (error: any) {
-      toast.error(error.response?.data || "Erro ao fazer login");
+      toast.error(error.response?.data || "Erro ao criar usuario!");
     } finally {
       setLoading(false);
     }
@@ -70,7 +61,7 @@ export default function BasicModal() {
   return (
     <div>
       <button onClick={handleOpen} className={styles.button_modal}>
-        Entrar
+        Cadastre-se
       </button>
 
       <Modal
@@ -81,7 +72,7 @@ export default function BasicModal() {
         className={styles.modalContainer}
       >
         <form onSubmit={onSubmit}>
-          <h1 className={styles.modal_title}>Bem Vindo!</h1>
+          <h1 className={styles.modal_title}>Crie Sua conta!</h1>
 
           <input {...register("nick")} placeholder="NickName..." />
           {errors?.nick && (
@@ -100,7 +91,7 @@ export default function BasicModal() {
           {loading ? (
             <span className={styles.loader}></span>
           ) : (
-            <button className={styles.send_form_button}>Entrar</button>
+            <button className={styles.send_form_button}>Criar</button>
           )}
         </form>
       </Modal>
