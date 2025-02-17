@@ -89,7 +89,7 @@ export default function BasicModal() {
           )}
 
           {loading ? (
-            <span className={styles.loader}></span>
+              <span className={styles.loadingMessage}><span className={styles.loader}></span>A primeira vez pode levar um pouco mais de tempo. Obrigado pela paciência! </span>
           ) : (
             <button className={styles.send_form_button}>Criar</button>
           )}

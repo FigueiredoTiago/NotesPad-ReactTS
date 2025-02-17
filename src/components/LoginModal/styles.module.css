@@ -97,6 +97,14 @@
   animation: animloader 1s linear infinite alternate;
 }
 
+.loadingMessage {
+  color: var(--color-one);
+  font-size: 1.4rem;
+  font-family: var(--font-one);
+  text-shadow: -0.1rem 0.1rem 0rem rgb(0, 0, 0);
+  text-align: center;
+}
+
 @keyframes animloader {
   0% {
     box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
