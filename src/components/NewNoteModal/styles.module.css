@@ -8,6 +8,7 @@
   transition: all 0.3s;
   box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
 
+
   &:hover {
     scale: 1.1;
   }
@@ -23,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
   z-index: 1000;
 
   .close_modal_button {
