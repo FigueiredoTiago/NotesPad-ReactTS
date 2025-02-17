@@ -57,7 +57,7 @@
 
     @media screen and (max-width: 768px) {
       width: 95%;
-      min-height: max-content;
+      min-height: 75dvh;
       box-shadow: -1px -1px 0px 4px var(--color-one);
     }
 
