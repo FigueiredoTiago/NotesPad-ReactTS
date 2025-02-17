@@ -24,7 +24,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: scroll;
   z-index: 1000;
 
   .close_modal_button {
@@ -58,7 +57,7 @@
 
     @media screen and (max-width: 768px) {
       width: 95%;
-      height: 80%;
+      min-height: max-content;
       box-shadow: -1px -1px 0px 4px var(--color-one);
     }
 
