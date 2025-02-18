@@ -1,10 +1,10 @@
 import styles from "./styles.module.css";
 import caveirinha from "../../assets/img/caveirinha.svg";
 import NewNoteModal from "../NewNoteModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const index = () => {
   //estado para controlar a abertura e fechamento do modal
@@ -14,18 +14,26 @@ const index = () => {
 
   const navigate = useNavigate();
 
-  const nick = Cookies.get("nick");
+  useEffect(() => {
+    const nick = Cookies.get("nick");
+    if (!nick) {
+      navigate("/");
+    }
+  }, [navigate]);
 
-  if (!nick) {
-    toast.error("Erro: Token de autenticação não encontrado.");
-    navigate("/");
-  }
+  const Client = useQueryClient();
 
-  const logout = () => {
+  const logout = async () => {
     Cookies.remove("auth");
     Cookies.remove("nick");
-    navigate("/");
+    Client.clear();
   };
+
+  const { mutate, isLoading } = useMutation(logout, {
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
 
   return (
     <header>
@@ -41,9 +49,15 @@ const index = () => {
         >
           +Nota
         </button>
-        <button onClick={() => logout()} className={styles.exitButton}>
-          Sair
-        </button>
+        {isLoading ? (
+          <button disabled className={styles.exitButton}>
+            Saindo...
+          </button>
+        ) : (
+          <button onClick={() => mutate()} className={styles.exitButton}>
+            Sair
+          </button>
+        )}
       </nav>
 
       {isOpen && <NewNoteModal isOpen={isOpen} setOpen={toggleModal} />}
