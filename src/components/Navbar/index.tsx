@@ -27,6 +27,7 @@ const index = () => {
     Cookies.remove("auth");
     Cookies.remove("nick");
     Client.clear();
+    await Client.invalidateQueries(["notes-lista"]);
   };
 
   const { mutate, isLoading } = useMutation(logout, {
