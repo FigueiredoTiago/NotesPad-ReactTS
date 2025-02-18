@@ -73,7 +73,7 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
 
         <form onSubmit={onSubmit} className={styles.modalContent}>
           <h2 className={styles.modal_title}>
-            <span>New</span> Note
+            <span>Nova</span> Nota
           </h2>
 
           <input
