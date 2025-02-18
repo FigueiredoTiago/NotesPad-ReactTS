@@ -6,7 +6,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 10000;
+  z-index: 1;
 
   @media screen and (max-width: 768px) {
     background-image: url("../../assets/img/mobileBackground.svg");
