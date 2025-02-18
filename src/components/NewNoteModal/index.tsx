@@ -100,7 +100,7 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
           {isLoading ? (
             <span className={styles.loader}></span>
           ) : (
-            <button className={styles.send_form_button}>Create</button>
+            <button className={styles.send_form_button}>Criar</button>
           )}
         </form>
       </div>

@@ -81,7 +81,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
 
         <form onSubmit={onSubmit} className={styles.modalContent}>
           <h2 className={styles.modal_title}>
-            <span>Edit</span> Note
+            <span>Editar</span> Nota
           </h2>
 
           <input
@@ -110,7 +110,7 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
           {isLoading ? (
             <span className={styles.loader}></span>
           ) : (
-            <button className={styles.send_form_button}>Edit</button>
+            <button className={styles.send_form_button}>Editar</button>
           )}
         </form>
       </div>
