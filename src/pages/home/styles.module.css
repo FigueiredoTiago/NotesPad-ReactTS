@@ -2,16 +2,21 @@
   position: relative;
   height: 100vh;
   background-color: var(--color-one);
-  background-image: url("../../assets/img/Wave.svg");
+  background-image: url("../../assets/img/background.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 10000;
+
+  @media screen and (max-width: 768px) {
+    background-image: url("../../assets/img/mobileBackground.svg");
+    background-size: cover;
+  }
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 
   .home_nav {
     padding: 1rem;
@@ -23,10 +28,7 @@
     top: 0;
     right: 0;
     z-index: 1000;
-
-    
   }
-
 
   .home_content {
     display: flex;
@@ -41,36 +43,28 @@
       font-family: var(--font-three);
       font-weight: lighter;
       text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.788);
-  
-  
+
       .spanPad {
-          font-size: 6rem;
-          color: #ff95a7;
+        font-size: 6rem;
+        color: #ff95a7;
       }
-  
+
       @media screen and (max-width: 768px) {
         font-size: 2rem;
         top: 10%;
-        
-  
+
         .spanPad {
           font-size: 3rem;
         }
-          
       }
-  
     }
-  
+
     .homeImage {
       max-width: 70rem;
-  
+
       @media screen and (max-width: 768px) {
         max-width: 40rem;
       }
     }
   }
-
-
- 
-
 }
