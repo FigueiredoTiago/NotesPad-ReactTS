@@ -26,7 +26,6 @@ const index = () => {
   const logout = async () => {
     Cookies.remove("auth");
     Cookies.remove("nick");
-    Client.clear();
     await Client.invalidateQueries(["notes-lista"]);
   };
 
