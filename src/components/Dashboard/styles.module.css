@@ -4,6 +4,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media screen and (max-width: 768px) {
+    background-image: url("../../assets/img/mobilebg.svg");
+    background-size: cover;
+  }
 }
 
 .container {
