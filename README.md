@@ -28,22 +28,6 @@ O **NotesPad** é um aplicativo web de bloco de notas completo, desenvolvido com
 git clone https://github.com/FigueiredoTiago/NotesPad-ReactTS.git
 ```
 
-### 2️⃣ Configuração do Backend
-
-1. Instale as dependências:
-   ```bash
-   npm install
-   ```
-2. Configure o banco de dados PostgreSQL e o Prisma:
-   ```bash
-   npx prisma migrate dev
-   Certifique-se De colocar sua url do seu  banco de dados PostgreSql corretamente no arquivo .Env criado pelo Prisma.
-   ```
-3. Inicie o servidor:
-   ```bash
-   npm run dev
-   ```
-
 ### 3️⃣ Configuração do Frontend
 
 1. Instale as dependências:
