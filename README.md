@@ -1,6 +1,6 @@
 # NotesPad 📝
 
-![NotesPad]('../../src/assets/img/background.svg');
+![NotesPad]('https://raw.githubusercontent.com/FigueiredoTiago/NotesPad-ReactTS/ecab4cef7b01af96139e0ab5b6b924181feb24f6/src/assets/img/background.svg');
 
 ## 📌 Sobre o projeto
 
@@ -9,7 +9,7 @@ O **NotesPad** é um aplicativo web de bloco de notas completo, desenvolvido com
 ## 🚀 Funcionalidades
 
 - Criar, editar e excluir notas
-- Pesquisa e filtro de notas *-Em Desenvolvimento....
+- Pesquisa e filtro de notas \*-Em Desenvolvimento....
 - Interface intuitiva e responsiva
 - Sincronização de dados com o banco de dados PostgreSQL
 
