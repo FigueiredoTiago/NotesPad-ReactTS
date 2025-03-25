@@ -116,7 +116,7 @@ export const registerUser = async (
   nick: string,
   password: string
 ): Promise<void> => {
-  const response = await axios.post(`${apiUrl}/user/create`, {
+  const response = await apiClient.post("/user/create", {
     nick,
     password,
   });
