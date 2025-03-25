@@ -6,17 +6,9 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
 import EditNoteModal from "../EditNoteModal";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 
 const NotesList = () => {
   const client = useQueryClient();
-
-  const token = Cookies.get("auth");
-
-  if (!token) {
-    toast.error("Erro: Token de autenticação não encontrado.");
-    return null;
-  }
 
   // Query para pegar todas as notas
   const {

@@ -85,7 +85,6 @@ export const login = async (
 };
 
 //funcao para registrar um novo usuario na api
-
 export const registerUser = async (
   nick: string,
   password: string
