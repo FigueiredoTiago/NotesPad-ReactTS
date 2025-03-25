@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,28 @@ interface NoteCreate {
   title: string;
   text: string;
 }
+
+//cliente Axios para interceptar as Requisicoes e adicionar o token no cabeçalho automaticamente
+
+const apiClient = axios.create({
+  baseURL: apiUrl, // Altere para a URL da sua API
+  timeout: 10000, // Tempo limite para as requisições
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Interceptador de requisição para token JWT.
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("auth");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 //funcao get com axios para pegar todas as notas da api
 
