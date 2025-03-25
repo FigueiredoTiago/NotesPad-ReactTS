@@ -49,31 +49,18 @@ export const getNotes = async (): Promise<Note[]> => {
 };
 
 //funcao para deletar uma nota da api o Id vem pelo Body da requisicao
-
-export const deleteNote = async (id: number, token: string): Promise<void> => {
+export const deleteNote = async (id: number): Promise<void> => {
   confirm("Deseja realmente deletar essa nota?");
 
   if (!confirm) {
     return;
   }
-  await axios.delete(`${apiUrl}/note/deletenote/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  await apiClient.delete(`/note/deletenote/${id}`);
 };
 
 //funcao para criar uma nova nota na api
-
-export const createNote = async (
-  note: NoteCreate,
-  token: string
-): Promise<void> => {
-  await axios.post(`${apiUrl}/note/create`, note, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const createNote = async (note: NoteCreate): Promise<void> => {
+  await apiClient.post(`${apiUrl}/note/create`, note);
 };
 
 //funcao para editar uma nota na api

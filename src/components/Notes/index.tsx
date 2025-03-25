@@ -37,23 +37,20 @@ const NotesList = () => {
   });
 
   // Mutate para deletar uma nota por Id
-  const { mutate, isLoading } = useMutation(
-    (id: number) => deleteNote(id, token),
-    {
-      onSuccess: () => {
-        client.invalidateQueries(["notes-lista"]);
-        toast.success("Nota deletada com sucesso!"); // Mensagem de sucesso
-      },
-      onError: (error: any) => {
-        // Exibe uma mensagem de erro
-        toast.error(
-          `Erro ao deletar a nota: ${
-            error?.response.data.message || "Tente novamente mais tarde."
-          }`
-        );
-      },
-    }
-  );
+  const { mutate, isLoading } = useMutation((id: number) => deleteNote(id), {
+    onSuccess: () => {
+      client.invalidateQueries(["notes-lista"]);
+      toast.success("Nota deletada com sucesso!"); // Mensagem de sucesso
+    },
+    onError: (error: any) => {
+      // Exibe uma mensagem de erro
+      toast.error(
+        `Erro ao deletar a nota: ${
+          error?.response.data.message || "Tente novamente mais tarde."
+        }`
+      );
+    },
+  });
 
   const [editNoteId, setEditNoteId] = useState<number | null>(null); // ID da nota sendo editada
   const openModal = (id: number) => setEditNoteId(id);
