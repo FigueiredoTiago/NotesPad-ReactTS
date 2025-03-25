@@ -100,7 +100,7 @@ export const login = async (
   nick: string,
   password: string
 ): Promise<{ token: string; nick: string }> => {
-  const response = await axios.post(`${apiUrl}/user/login`, {
+  const response = await apiClient.post("/user/login", {
     nick,
     password,
   });
