@@ -23,7 +23,7 @@ const NotesList = () => {
     data,
     isLoading: loadingNotes,
     error,
-  } = useQuery(["notes-lista"], () => getNotes(token), {
+  } = useQuery(["notes-lista"], () => getNotes(), {
     staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
     retry: false,
     onError: (error: any) => {

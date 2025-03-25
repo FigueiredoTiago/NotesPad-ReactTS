@@ -43,12 +43,8 @@ apiClient.interceptors.request.use(
 
 //funcao get com axios para pegar todas as notas da api
 
-export const getNotes = async (token: string): Promise<Note[]> => {
-  const response = await axios.get<NotesResponse>(`${apiUrl}/note/list`, {
-    headers: {
-      Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho
-    },
-  });
+export const getNotes = async (): Promise<Note[]> => {
+  const response = await apiClient.get<NotesResponse>("/note/list");
   return response.data.data;
 };
 
