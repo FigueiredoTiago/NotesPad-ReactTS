@@ -64,17 +64,8 @@ export const createNote = async (note: NoteCreate): Promise<void> => {
 };
 
 //funcao para editar uma nota na api
-
-export const editNote = async (
-  id: number,
-  note: NoteCreate,
-  token: string
-): Promise<void> => {
-  await axios.patch(`${apiUrl}/note/updatenote/${id}`, note, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const editNote = async (id: number, note: NoteCreate): Promise<void> => {
+  await apiClient.patch(`${apiUrl}/note/updatenote/${id}`, note);
 };
 
 //funcao para fazer login na api
