@@ -16,7 +16,7 @@ const NotesList = () => {
     isLoading: loadingNotes,
     error,
   } = useQuery(["notes-lista"], () => getNotes(), {
-    staleTime: 1000 * 60 * 5, // 5 minutos para atualizar novamente
+    staleTime: 1000 * 60 * 19, // 19 minutos para atualizar novamente
     retry: false,
     onError: (error: any) => {
       // Exibe uma mensagem de erro

@@ -41,6 +41,13 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+//funcao para Teste da API
+
+export const testApi = async (): Promise<string> => {
+  const response = await apiClient.get("/");
+  return response.data;
+};
+
 //funcao get com axios para pegar todas as notas da api
 
 export const getNotes = async (): Promise<Note[]> => {
