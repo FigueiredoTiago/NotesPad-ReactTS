@@ -55,6 +55,15 @@ export const getNotes = async (): Promise<Note[]> => {
   return response.data.data;
 };
 
+//funcao para Buscar uma Nota Pelo Titulo:
+
+export const getNoteByTitle = async (title: string): Promise<Note[]> => {
+  const reponse = await apiClient.get<NotesResponse>(
+    `${apiUrl}/note/searchnote?title=${title}`
+  );
+  return reponse.data.data;
+};
+
 //funcao para deletar uma nota da api o Id vem pelo Body da requisicao
 export const deleteNote = async (id: number): Promise<void> => {
   confirm("Deseja realmente deletar essa nota?");
