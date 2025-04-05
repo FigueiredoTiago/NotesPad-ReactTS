@@ -23,6 +23,10 @@ const index = () => {
   return (
     <>
       <main className={styles.container}>
+        <h2 className={styles.nick}>
+          Olá, <span>{nick}!</span> Pronto para anotar suas melhores ideias?
+        </h2>
+
         <nav className={styles.nav_search}>
           <input type="text" placeholder="Buscar Notas..." />
 
@@ -30,10 +34,6 @@ const index = () => {
             <img src={searchIcon} alt="search" />
           </button>
         </nav>
-
-        <h2 className={styles.nick}>
-          Olá, <span>{nick}!</span> Pronto para anotar suas melhores ideias?
-        </h2>
 
         <Notes />
       </main>
