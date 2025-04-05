@@ -5,6 +5,7 @@ import Footer from "../Footer/index";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import searchIcon from "../../assets/icons/searchIcon.svg";
 
 const index = () => {
   const nick = Cookies.get("nick");
@@ -22,6 +23,14 @@ const index = () => {
   return (
     <>
       <main className={styles.container}>
+        <nav className={styles.nav_search}>
+          <input type="text" placeholder="Buscar Notas..." />
+
+          <button type="submit" className={styles.search_button}>
+            <img src={searchIcon} alt="search" />
+          </button>
+        </nav>
+
         <h2 className={styles.nick}>
           Olá, <span>{nick}!</span> Pronto para anotar suas melhores ideias?
         </h2>

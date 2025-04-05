@@ -34,3 +34,39 @@ body {
     color: #ef6565;
   }
 }
+
+.nav_search {
+  margin-bottom: 3rem;
+  max-width: 50rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdfdfd;
+  border-radius: 5rem;
+  padding: 1rem;
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    
+  }
+
+  input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+  }
+
+  .search_button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
