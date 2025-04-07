@@ -8,7 +8,6 @@
   transition: all 0.3s;
   box-shadow: -0.3rem 0.3rem 0rem 0rem rgb(0, 0, 0);
 
-
   &:hover {
     scale: 1.1;
   }
@@ -94,6 +93,30 @@
       resize: none;
       font-family: var(--font-one);
       background-color: var(--color-one);
+    }
+
+    .favorite_button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      font-family: var(--font-one);
+      font-weight: bold;
+
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      transition: all 0.3s;
+
+      img {
+        width: 2rem;
+        
+      }
+
+      &:hover {
+        scale: 1.1;
+      }
     }
 
     .send_form_button {

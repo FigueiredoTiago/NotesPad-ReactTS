@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../../api/api";
 import { toast } from "react-toastify";
+import favoriteIcon from "../../assets/icons/favoriteIcon.svg";
+import NofavoriteIcon from "../../assets/icons/noFavoriteIcon.svg";
 
 interface NewNoteModalProps {
   isOpen: boolean;
@@ -13,6 +15,7 @@ interface NewNoteModalProps {
 interface FormData {
   title: string;
   text: string;
+  favorite: boolean;
 }
 
 const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
@@ -48,8 +51,22 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      title: "",
+      text: "",
+      favorite: false,
+    },
+  });
+
+  const favorite = watch("favorite");
+
+  const toggleFavorite = () => {
+    setValue("favorite", !favorite);
+  };
 
   const onSubmit = handleSubmit((data) => {
     mutate(data);
@@ -86,6 +103,28 @@ const index = ({ isOpen, setOpen }: NewNoteModalProps) => {
 
           {errors.text && (
             <p className={styles.error_message}>{errors.text.message}</p>
+          )}
+
+          <input type="hidden" {...register("favorite")} />
+
+          {favorite ? (
+            <button
+              type="button"
+              onClick={toggleFavorite}
+              className={styles.favorite_button}
+            >
+              <img src={favoriteIcon} alt="icone de favorito" /> Desmarcar como
+              Favorita?
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={toggleFavorite}
+              className={styles.favorite_button}
+            >
+              <img src={NofavoriteIcon} alt="icone de favorito" /> Marcar como
+              Favorita?
+            </button>
           )}
 
           {isLoading ? (
