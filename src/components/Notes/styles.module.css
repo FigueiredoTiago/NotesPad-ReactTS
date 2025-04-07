@@ -10,7 +10,7 @@
 
   .notes_card {
     position: relative;
-    font-family: var(--font-four);
+    font-family: var(--font-one);
     color: #000;
     font-size: 2rem;
     min-width: 33rem;
@@ -41,6 +41,7 @@
     }
 
     .text {
+      font-size: 1.6rem;
       white-space: pre-wrap;
       word-wrap: break-word;
     }
@@ -78,17 +79,18 @@
     }
 
     .favorite_icon {
-      position: absolute;
-      left: 1rem;
-      right: 6rem;
       width: 2rem;
     }
 
     sup.updateTime {
       position: absolute;
       top: 1rem;
-      left: 4rem;
+      left: 1rem;
       font-size: 1.1rem;
+
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
   }
 }

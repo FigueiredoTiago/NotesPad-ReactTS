@@ -83,14 +83,6 @@ const NotesList = () => {
             .sort((a, b) => (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0))
             .map((notesData) => (
               <div key={notesData.id} className={styles.notes_card}>
-                {notesData.favorite && (
-                  <img
-                    src={favoriteIcon}
-                    className={styles.favorite_icon}
-                    alt="icone de favorito"
-                  />
-                )}
-
                 <button
                   className={styles.icon_delete}
                   onClick={() => mutate(notesData.id)}
@@ -120,6 +112,13 @@ const NotesList = () => {
                 <h1 className={styles.title}>
                   -{notesData.title}-{" "}
                   <sup className={styles.updateTime}>
+                    {notesData.favorite && (
+                      <img
+                        src={favoriteIcon}
+                        className={styles.favorite_icon}
+                        alt="icone de favorito"
+                      />
+                    )}{" "}
                     {formatDate(notesData.createdAt)}
                   </sup>
                 </h1>
