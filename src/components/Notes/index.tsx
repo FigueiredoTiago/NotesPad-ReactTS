@@ -6,6 +6,7 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getNotes, deleteNote } from "../../api/api";
 import EditNoteModal from "../EditNoteModal";
 import { toast } from "react-toastify";
+import favoriteIcon from "../../assets/icons/favoriteIcon.svg";
 
 const NotesList = () => {
   const client = useQueryClient();
@@ -62,7 +63,7 @@ const NotesList = () => {
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
-  // Renderização do componente se tiver erro, exibir mensagem de erro 
+  // Renderização do componente se tiver erro, exibir mensagem de erro
 
   if (error) {
     return (
@@ -78,43 +79,53 @@ const NotesList = () => {
       {loadingNotes ? <span className={styles.loader}></span> : null}
 
       {data && data.length > 0
-        ? data.map((notesData) => (
-            <div key={notesData.id} className={styles.notes_card}>
-              <button
-                className={styles.icon_delete}
-                onClick={() => mutate(notesData.id)}
-                disabled={isLoading}
-              >
-                <img src={deleteIcon} alt="Delete Note" />
-              </button>
+        ? [...data]
+            .sort((a, b) => (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0))
+            .map((notesData) => (
+              <div key={notesData.id} className={styles.notes_card}>
+                {notesData.favorite && (
+                  <img
+                    src={favoriteIcon}
+                    className={styles.favorite_icon}
+                    alt="icone de favorito"
+                  />
+                )}
 
-              <span
-                className={styles.icon_edit}
-                onClick={() => openModal(notesData.id)}
-              >
-                <img src={editIcon} alt="Edit Note" />
-              </span>
+                <button
+                  className={styles.icon_delete}
+                  onClick={() => mutate(notesData.id)}
+                  disabled={isLoading}
+                >
+                  <img src={deleteIcon} alt="Delete Note" />
+                </button>
 
-              {editNoteId === notesData.id && (
-                <EditNoteModal
-                  id={notesData.id}
-                  title={notesData.title}
-                  text={notesData.text}
-                  isOpen={true}
-                  setOpen={closeModal}
-                />
-              )}
+                <span
+                  className={styles.icon_edit}
+                  onClick={() => openModal(notesData.id)}
+                >
+                  <img src={editIcon} alt="Edit Note" />
+                </span>
 
-              <h1 className={styles.title}>
-                -{notesData.title}-{" "}
-                <sup className={styles.updateTime}>
-                  {formatDate(notesData.createdAt)}
-                </sup>
-              </h1>
+                {editNoteId === notesData.id && (
+                  <EditNoteModal
+                    id={notesData.id}
+                    title={notesData.title}
+                    text={notesData.text}
+                    isOpen={true}
+                    setOpen={closeModal}
+                  />
+                )}
 
-              <p className={styles.text}>{notesData.text}</p>
-            </div>
-          ))
+                <h1 className={styles.title}>
+                  -{notesData.title}-{" "}
+                  <sup className={styles.updateTime}>
+                    {formatDate(notesData.createdAt)}
+                  </sup>
+                </h1>
+
+                <p className={styles.text}>{notesData.text}</p>
+              </div>
+            ))
         : null}
 
       {!isLoading && !loadingNotes && (!data || data.length === 0) ? (

@@ -37,7 +37,7 @@
       font-size: 2rem;
       font-weight: 700;
       text-align: center;
-      padding-top: 2rem;
+      padding-top: 4rem;
     }
 
     .text {
@@ -77,10 +77,17 @@
       }
     }
 
+    .favorite_icon {
+      position: absolute;
+      left: 1rem;
+      right: 6rem;
+      width: 2rem;
+    }
+
     sup.updateTime {
       position: absolute;
       top: 1rem;
-      left: 1rem;
+      left: 4rem;
       font-size: 1.1rem;
     }
   }
