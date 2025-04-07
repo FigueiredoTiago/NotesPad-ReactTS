@@ -10,7 +10,7 @@ import NofavoriteIcon from "../../assets/icons/noFavoriteIcon.svg";
 interface NewNoteModalProps {
   isOpen: boolean;
   setOpen: () => void;
-}
+} 
 
 interface FormData {
   title: string;

@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { editNote } from "../../api/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import favoriteIcon from "../../assets/icons/favoriteIcon.svg";
+import NofavoriteIcon from "../../assets/icons/noFavoriteIcon.svg";
 
 interface EditNoteModalProps {
   isOpen: boolean;
@@ -11,9 +13,17 @@ interface EditNoteModalProps {
   id: number;
   title: string;
   text: string;
+  favorite?: boolean;
 }
 
-const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
+const index = ({
+  isOpen,
+  setOpen,
+  id,
+  title,
+  text,
+  favorite,
+}: EditNoteModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -27,13 +37,28 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
   interface FormData {
     title: string;
     text: string;
+    favorite?: boolean;
   }
 
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      title: title,
+      text: text,
+      favorite: favorite,
+    },
+  });
+
+  const isfavorite = watch("favorite");
+
+  const toggleFavorite = () => {
+    setValue("favorite", !isfavorite);
+  };
 
   const client = useQueryClient();
 
@@ -56,7 +81,11 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
   );
 
   const onSubmit = handleSubmit((data) => {
-    if (data.title === title && data.text === text) {
+    if (
+      data.title === title &&
+      data.text === text &&
+      data.favorite === favorite
+    ) {
       alert("Nenhuma alteração foi feita!");
       setOpen(); // Fecha o modal, pois não houve alterações
       return;
@@ -82,7 +111,6 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
             })}
             type="text"
             placeholder="Titulo da sua Nota..."
-            defaultValue={title}
           />
 
           {errors.title && (
@@ -92,11 +120,32 @@ const index = ({ isOpen, setOpen, id, title, text }: EditNoteModalProps) => {
           <textarea
             {...register("text", { required: "Campo de nota Obrigatório!" })}
             placeholder="Escreva Sua Nota..."
-            defaultValue={text}
           ></textarea>
 
           {errors.text && (
             <p className={styles.error_message}>{errors.text.message}</p>
+          )}
+
+          <input type="hidden" {...register("favorite")} />
+
+          {isfavorite ? (
+            <button
+              type="button"
+              onClick={toggleFavorite}
+              className={styles.favorite_button}
+            >
+              <img src={favoriteIcon} alt="icone de favorito" /> Desmarcar como
+              Favorita?
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={toggleFavorite}
+              className={styles.favorite_button}
+            >
+              <img src={NofavoriteIcon} alt="icone de favorito" /> Marcar como
+              Favorita?
+            </button>
           )}
 
           {isLoading ? (

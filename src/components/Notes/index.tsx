@@ -111,6 +111,7 @@ const NotesList = () => {
                     id={notesData.id}
                     title={notesData.title}
                     text={notesData.text}
+                    favorite={notesData.favorite}
                     isOpen={true}
                     setOpen={closeModal}
                   />
