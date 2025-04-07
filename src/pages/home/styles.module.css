@@ -9,14 +9,14 @@
   z-index: 1;
 
   @media screen and (max-width: 768px) {
-    background-image: url("../../assets/img/backgroundMobile.svg");
+    background-image: url("../../assets/img/mobileintrobg.svg");
     background-size: cover;
   }
 
- /* tablet */
+  /* tablet */
 
   @media screen and (max-width: 1024px) {
-    background-image: url("../../assets/img/backgroundMobile.svg");
+    background-image: url("../../assets/img/mobileintrobg.svg");
     background-size: cover;
   }
 
