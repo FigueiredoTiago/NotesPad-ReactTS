@@ -9,7 +9,7 @@ O **NotesPad** é um aplicativo web de bloco de notas completo, desenvolvido com
 ## 🚀 Funcionalidades
 
 - Criar, editar e excluir notas
-- Pesquisa e filtro de notas \*-Em Desenvolvimento....
+- Pesquisa e filtro de notas 
 - Interface intuitiva e responsiva
 - Sincronização de dados com o banco de dados PostgreSQL
 
